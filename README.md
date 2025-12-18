@@ -1,3 +1,5 @@
+![ngx-web-tour demo](https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F18tww04bs9i59giqc1fm.png)
+
 # 🎯 NgxWebTour
 
 A beautiful, modern, and fully customizable product tour library for Angular applications. Create engaging user onboarding experiences with smooth animations and professional UI.
