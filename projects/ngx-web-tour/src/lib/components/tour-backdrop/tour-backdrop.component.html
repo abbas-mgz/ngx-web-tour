@@ -1,15 +1,27 @@
 <div
   class="ngx-tour-backdrop"
   [class.visible]="isVisible"
-  [style.background-color]="color"
   (click)="onBackdropClick()"
 >
-  <div
-    class="ngx-tour-highlight"
-    [style.top]="highlightStyle.top"
-    [style.left]="highlightStyle.left"
-    [style.width]="highlightStyle.width"
-    [style.height]="highlightStyle.height"
-    (click)="$event.stopPropagation()"
-  ></div>
+  <svg class="backdrop-mask" width="100%" height="100%">
+    <defs>
+      <mask id="backdrop-mask">
+        <rect width="100%" height="100%" fill="white"/>
+        <rect
+          [attr.x]="highlightStyle.left"
+          [attr.y]="highlightStyle.top"
+          [attr.width]="highlightStyle.width"
+          [attr.height]="highlightStyle.height"
+          [attr.rx]="8"
+          fill="black"
+        />
+      </mask>
+    </defs>
+    <rect
+      width="100%"
+      height="100%"
+      [attr.fill]="color"
+      mask="url(#backdrop-mask)"
+    />
+  </svg>
 </div>

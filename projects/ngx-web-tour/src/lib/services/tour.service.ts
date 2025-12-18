@@ -1,4 +1,4 @@
-import { Injectable, ComponentRef, ApplicationRef, createComponent, EnvironmentInjector } from '@angular/core';
+import { Injectable, ComponentRef, ApplicationRef, Injector, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { TourStep, TourConfig, TourState } from '../models/tour-step.model';
 import { TourTooltipComponent } from '../components/tour-tooltip/tour-tooltip.component';
@@ -42,7 +42,8 @@ export class TourService {
 
   constructor(
     private appRef: ApplicationRef,
-    private injector: EnvironmentInjector,
+    private injector: Injector,
+    private componentFactoryResolver: ComponentFactoryResolver,
     private i18nService: TourI18nService
   ) {}
 
@@ -136,29 +137,27 @@ export class TourService {
   }
 
   private createBackdrop(targetElement: HTMLElement): void {
-    const backdropComponent = createComponent(TourBackdropComponent, {
-      environmentInjector: this.injector,
-    });
-
-    backdropComponent.setInput('targetElement', targetElement);
-    backdropComponent.setInput('color', this.config.backdropColor);
-    backdropComponent.instance.backdropClick.subscribe(() => {
+    const factory = this.componentFactoryResolver.resolveComponentFactory(TourBackdropComponent);
+    const componentRef = factory.create(this.injector);
+    
+    componentRef.instance.targetElement = targetElement;
+    componentRef.instance.color = this.config.backdropColor || 'rgba(0, 0, 0, 0.7)';
+    componentRef.instance.backdropClick.subscribe(() => {
       if (this.config.closeOnBackdropClick) {
         this.end();
       }
     });
 
-    this.appRef.attachView(backdropComponent.hostView);
-    const domElem = backdropComponent.location.nativeElement as HTMLElement;
+    this.appRef.attachView(componentRef.hostView);
+    const domElem = componentRef.location.nativeElement as HTMLElement;
     document.body.appendChild(domElem);
 
-    this.backdropRef = backdropComponent;
+    this.backdropRef = componentRef;
   }
 
   private createTooltip(step: TourStep): void {
-    const tooltipComponent = createComponent(TourTooltipComponent, {
-      environmentInjector: this.injector,
-    });
+    const factory = this.componentFactoryResolver.resolveComponentFactory(TourTooltipComponent);
+    const componentRef = factory.create(this.injector);
 
     const useI18n = this.config.useI18n !== false;
     const nextBtnText = step.nextBtnText || this.config.nextBtnText || (useI18n ? this.i18nService.translate('nextBtn') : 'Next');
@@ -172,22 +171,22 @@ export class TourService {
       doneBtnText,
     };
 
-    tooltipComponent.setInput('step', stepWithTranslations);
-    tooltipComponent.setInput('currentIndex', this.currentIndex);
-    tooltipComponent.setInput('totalSteps', this.currentSteps.length);
-    tooltipComponent.setInput('showProgress', this.config.showProgress ?? step.showProgress ?? true);
-    tooltipComponent.setInput('allowClose', this.config.allowClose ?? step.allowClose ?? true);
+    componentRef.instance.step = stepWithTranslations;
+    componentRef.instance.currentIndex = this.currentIndex;
+    componentRef.instance.totalSteps = this.currentSteps.length;
+    componentRef.instance.showProgress = this.config.showProgress ?? step.showProgress ?? true;
+    componentRef.instance.allowClose = this.config.allowClose ?? step.allowClose ?? true;
 
-    tooltipComponent.instance.next.subscribe(() => this.next());
-    tooltipComponent.instance.prev.subscribe(() => this.previous());
-    tooltipComponent.instance.done.subscribe(() => this.end());
-    tooltipComponent.instance.close.subscribe(() => this.end());
+    componentRef.instance.next.subscribe(() => this.next());
+    componentRef.instance.prev.subscribe(() => this.previous());
+    componentRef.instance.done.subscribe(() => this.end());
+    componentRef.instance.close.subscribe(() => this.end());
 
-    this.appRef.attachView(tooltipComponent.hostView);
-    const domElem = tooltipComponent.location.nativeElement as HTMLElement;
+    this.appRef.attachView(componentRef.hostView);
+    const domElem = componentRef.location.nativeElement as HTMLElement;
     document.body.appendChild(domElem);
 
-    this.tooltipRef = tooltipComponent;
+    this.tooltipRef = componentRef;
   }
 
   private cleanup(): void {

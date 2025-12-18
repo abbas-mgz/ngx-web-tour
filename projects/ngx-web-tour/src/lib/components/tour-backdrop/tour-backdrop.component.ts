@@ -9,15 +9,12 @@ import {
   ChangeDetectorRef,
   AfterViewInit,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'ngx-tour-backdrop',
-  standalone: true,
-  imports: [CommonModule],
   templateUrl: './tour-backdrop.component.html',
   styleUrls: ['./tour-backdrop.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TourBackdropComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() targetElement!: HTMLElement;
@@ -28,10 +25,10 @@ export class TourBackdropComponent implements OnInit, AfterViewInit, OnDestroy {
 
   isVisible = false;
   highlightStyle = {
-    top: '0px',
-    left: '0px',
-    width: '0px',
-    height: '0px',
+    top: 0,
+    left: 0,
+    width: 0,
+    height: 0,
   };
 
   private resizeObserver?: ResizeObserver;
@@ -63,14 +60,12 @@ export class TourBackdropComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!this.targetElement) return;
 
     const rect = this.targetElement.getBoundingClientRect();
-    const scrollX = window.scrollX || window.pageXOffset;
-    const scrollY = window.scrollY || window.pageYOffset;
 
     this.highlightStyle = {
-      top: `${rect.top + scrollY - this.padding}px`,
-      left: `${rect.left + scrollX - this.padding}px`,
-      width: `${rect.width + this.padding * 2}px`,
-      height: `${rect.height + this.padding * 2}px`,
+      top: Math.max(0, rect.top - this.padding),
+      left: Math.max(0, rect.left - this.padding),
+      width: rect.width + this.padding * 2,
+      height: rect.height + this.padding * 2,
     };
 
     this.cdr.markForCheck();

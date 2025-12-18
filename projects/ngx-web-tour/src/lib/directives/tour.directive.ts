@@ -8,8 +8,7 @@ import {
 import { TourService } from '../services/tour.service';
 
 @Directive({
-  selector: '[tour]',
-  standalone: true,
+  selector: '[tour]'
 })
 export class TourDirective implements AfterViewInit, OnDestroy {
   @Input() tour!: string;
@@ -29,7 +28,15 @@ export class TourDirective implements AfterViewInit, OnDestroy {
     private el: ElementRef<HTMLElement>,
     private tourService: TourService
   ) {
-    this.stepId = crypto.randomUUID();
+    this.stepId = this.generateUUID();
+  }
+
+  private generateUUID(): string {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+      const r = Math.random() * 16 | 0;
+      const v = c === 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
   }
 
   ngAfterViewInit(): void {

@@ -10,16 +10,13 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { TourStep } from '../../models/tour-step.model';
 
 @Component({
   selector: 'ngx-tour-tooltip',
-  standalone: true,
-  imports: [CommonModule],
   templateUrl: './tour-tooltip.component.html',
   styleUrls: ['./tour-tooltip.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TourTooltipComponent implements OnInit, OnDestroy {
   @Input() step!: TourStep;
