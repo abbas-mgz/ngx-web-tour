@@ -19,6 +19,7 @@ A beautiful, modern, and fully customizable product tour library for Angular app
 - 🚀 **Multiple Tours** - Support for multiple independent tours
 - 💪 **Type Safe** - Full TypeScript support with IntelliSense
 - 🪶 **Lightweight** - Zero external dependencies (except Angular & RxJS)
+- 🌍 **i18n Ready** - Built-in support for 13+ languages
 
 ## 📦 Installation
 
@@ -83,6 +84,7 @@ That's it! 🎉
 
 - [Full Documentation](./projects/ngx-web-tour/README.md)
 - [Examples](./EXAMPLES.md)
+- [i18n Guide](./I18N.md)
 - [Compatibility Guide](./COMPATIBILITY.md)
 - [Changelog](./CHANGELOG.md)
 

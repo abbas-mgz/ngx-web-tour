@@ -23,6 +23,8 @@ export interface TourConfig {
   doneBtnText?: string;
   skipBtnText?: string;
   animationDuration?: number;
+  language?: string; // Language code (e.g., 'en', 'fa', 'ar')
+  useI18n?: boolean; // Use i18n service for translations (default: true)
 }
 
 export interface TourState {

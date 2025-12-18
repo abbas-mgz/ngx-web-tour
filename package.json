@@ -3,8 +3,11 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve demo --open",
+    "start:demo": "ng serve demo --open",
     "build": "ng build",
+    "build:demo": "ng build demo",
+    "build:all": "npm run build && npm run build:demo",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

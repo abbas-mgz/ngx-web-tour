@@ -24,6 +24,7 @@ All notable changes to this project will be documented in this file.
 - **Customizable Configuration**: Full control over tour behavior and appearance
 - **Multiple Tours**: Support for multiple independent tours
 - **TypeScript Support**: Full type safety and IntelliSense support
+- **Internationalization (i18n)**: Built-in support for 13+ languages with auto-detection
 
 ### 🎨 Components
 
@@ -31,18 +32,23 @@ All notable changes to this project will be documented in this file.
 - `TourBackdropComponent`: Backdrop overlay with element highlighting
 - `TourDirective`: Directive for marking tour steps
 - `TourService`: Core service for tour management
+- `TourI18nService`: Internationalization service for multi-language support
 
 ### 📦 Models & Interfaces
 
 - `TourStep`: Interface for tour step configuration
 - `TourConfig`: Interface for global tour configuration
 - `TourState`: Interface for tour state tracking
+- `TourTranslations`: Interface for i18n translations
+- `TourLanguageConfig`: Interface for multi-language configuration
 
 ### 🔧 Configuration Options
 
 - Backdrop customization (color, click behavior)
 - Button text customization
 - Progress bar visibility
+- Language selection (13+ languages supported)
+- i18n enable/disable
 - Close button visibility
 - Animation duration
 - And more...

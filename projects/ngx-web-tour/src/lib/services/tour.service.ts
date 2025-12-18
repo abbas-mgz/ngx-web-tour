@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { TourStep, TourConfig, TourState } from '../models/tour-step.model';
 import { TourTooltipComponent } from '../components/tour-tooltip/tour-tooltip.component';
 import { TourBackdropComponent } from '../components/tour-backdrop/tour-backdrop.component';
+import { TourI18nService } from './tour-i18n.service';
 
 @Injectable({ providedIn: 'root' })
 export class TourService {
@@ -29,18 +30,20 @@ export class TourService {
     closeOnBackdropClick: true,
     showProgress: true,
     allowClose: true,
-    nextBtnText: 'Next',
-    prevBtnText: 'Previous',
-    doneBtnText: 'Done',
-    skipBtnText: 'Skip',
+    nextBtnText: undefined,
+    prevBtnText: undefined,
+    doneBtnText: undefined,
+    skipBtnText: undefined,
     animationDuration: 300,
+    useI18n: true,
   };
 
   private config: TourConfig = { ...this.defaultConfig };
 
   constructor(
     private appRef: ApplicationRef,
-    private injector: EnvironmentInjector
+    private injector: EnvironmentInjector,
+    private i18nService: TourI18nService
   ) {}
 
   register(name: string, step: TourStep): void {
@@ -67,6 +70,10 @@ export class TourService {
   start(name: string, config?: Partial<TourConfig>): void {
     if (config) {
       this.configure(config);
+    }
+
+    if (this.config.language) {
+      this.i18nService.setLanguage(this.config.language);
     }
 
     const steps = this.tours.get(name);
@@ -111,22 +118,18 @@ export class TourService {
     const step = this.currentSteps[this.currentIndex];
     if (!step) return;
 
-    // Cleanup previous components
     this.cleanup();
 
-    // Create backdrop
     if (this.config.backdrop) {
       this.createBackdrop(step.element);
     }
 
-    // Scroll to element
     step.element.scrollIntoView({
       behavior: 'smooth',
       block: 'center',
       inline: 'center',
     });
 
-    // Create tooltip after scroll
     setTimeout(() => {
       this.createTooltip(step);
     }, this.config.animationDuration || 300);
@@ -157,7 +160,19 @@ export class TourService {
       environmentInjector: this.injector,
     });
 
-    tooltipComponent.setInput('step', step);
+    const useI18n = this.config.useI18n !== false;
+    const nextBtnText = step.nextBtnText || this.config.nextBtnText || (useI18n ? this.i18nService.translate('nextBtn') : 'Next');
+    const prevBtnText = step.prevBtnText || this.config.prevBtnText || (useI18n ? this.i18nService.translate('prevBtn') : 'Previous');
+    const doneBtnText = step.doneBtnText || this.config.doneBtnText || (useI18n ? this.i18nService.translate('doneBtn') : 'Done');
+
+    const stepWithTranslations = {
+      ...step,
+      nextBtnText,
+      prevBtnText,
+      doneBtnText,
+    };
+
+    tooltipComponent.setInput('step', stepWithTranslations);
     tooltipComponent.setInput('currentIndex', this.currentIndex);
     tooltipComponent.setInput('totalSteps', this.currentSteps.length);
     tooltipComponent.setInput('showProgress', this.config.showProgress ?? step.showProgress ?? true);
