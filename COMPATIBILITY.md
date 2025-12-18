@@ -40,7 +40,7 @@ If you're using Angular 12 or below, you'll need to upgrade your Angular version
 ng update @angular/core@13 @angular/cli@13
 
 # Then install ngx-web-tour
-npm install ngx-web-tour
+npm install @abbasmgz/ngx-web-tour
 ```
 
 ## RxJS Compatibility
@@ -66,18 +66,18 @@ Works with:
 
 ### Angular 13-14
 ```bash
-npm install ngx-web-tour
+npm install @abbasmgz/ngx-web-tour
 ```
 
 ### Angular 15+
 ```bash
-npm install ngx-web-tour
+npm install @abbasmgz/ngx-web-tour
 ```
 
 ### Angular 17+ (Standalone)
 ```typescript
 // You can use it with standalone components
-import { TourDirective } from 'ngx-web-tour';
+import { TourDirective } from '@abbasmgz/ngx-web-tour';
 
 @Component({
   standalone: true,

@@ -16,7 +16,7 @@ A beautiful, customizable, and easy-to-use product tour library for Angular 13+ 
 ## 📦 Installation
 
 ```bash
-npm install ngx-web-tour
+npm install @abbasmgz/ngx-web-tour
 ```
 
 ## 🚀 Quick Start
@@ -24,7 +24,7 @@ npm install ngx-web-tour
 ### 1. Import the Module
 
 ```typescript
-import { NgxWebTourModule } from 'ngx-web-tour';
+import { NgxWebTourModule } from '@abbasmgz/ngx-web-tour';
 
 @NgModule({
   imports: [NgxWebTourModule],
@@ -68,7 +68,7 @@ export class AppModule {}
 
 ```typescript
 import { Component } from '@angular/core';
-import { TourService } from 'ngx-web-tour';
+import { TourService } from '@abbasmgz/ngx-web-tour';
 
 @Component({
   selector: 'app-root',

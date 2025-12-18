@@ -4,7 +4,7 @@
 
 ```typescript
 import { Component } from '@angular/core';
-import { TourService } from 'ngx-web-tour';
+import { TourService } from '@abbasmgz/ngx-web-tour';
 
 @Component({
   selector: 'app-demo',
@@ -88,7 +88,7 @@ export class DemoComponent {
 
 ```typescript
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { TourService } from 'ngx-web-tour';
+import { TourService } from '@abbasmgz/ngx-web-tour';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
