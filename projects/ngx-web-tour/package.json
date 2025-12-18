@@ -14,11 +14,15 @@
     "tooltip",
     "highlight"
   ],
-  "author": "Your Name",
+  "author": "abbas-mgz",
   "license": "MIT",
+  "homepage": "https://github.com/abbas-mgz/ngx-web-tour#readme",
+  "bugs": {
+    "url": "https://github.com/abbas-mgz/ngx-web-tour/issues"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/ngx-web-tour.git"
+    "url": "https://github.com/abbas-mgz/ngx-web-tour.git"
   },
   "peerDependencies": {
     "@angular/common": ">=13.0.0",

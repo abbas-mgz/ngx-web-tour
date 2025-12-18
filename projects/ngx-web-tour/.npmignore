@@ -1,0 +1,19 @@
+# Source files
+*.ts
+!*.d.ts
+
+# Configuration files
+tsconfig*.json
+ng-package.json
+
+# Test files
+*.spec.ts
+*.spec.js
+
+# Development files
+.editorconfig
+.gitignore
+
+# Directories
+src/
+node_modules/
