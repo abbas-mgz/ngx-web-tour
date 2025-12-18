@@ -1,0 +1,69 @@
+<div
+  #tooltip
+  class="ngx-tour-tooltip"
+  [class.visible]="isVisible"
+  [class.arrow-top]="arrowPosition === 'top'"
+  [class.arrow-bottom]="arrowPosition === 'bottom'"
+  [class.arrow-left]="arrowPosition === 'left'"
+  [class.arrow-right]="arrowPosition === 'right'"
+  [style.top]="position.top"
+  [style.left]="position.left"
+>
+  <div class="ngx-tour-tooltip-arrow"></div>
+  
+  <button
+    *ngIf="allowClose"
+    class="ngx-tour-close"
+    (click)="onClose()"
+    aria-label="Close tour"
+  >
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <path d="M1 1L13 13M13 1L1 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </button>
+
+  <div class="ngx-tour-content">
+    <h3 *ngIf="step.title" class="ngx-tour-title">{{ step.title }}</h3>
+    <p class="ngx-tour-text">{{ step.text }}</p>
+  </div>
+
+  <div class="ngx-tour-footer">
+    <div *ngIf="showProgress" class="ngx-tour-progress">
+      <div class="ngx-tour-progress-bar">
+        <div
+          class="ngx-tour-progress-fill"
+          [style.width.%]="progressPercentage"
+        ></div>
+      </div>
+      <span class="ngx-tour-progress-text">
+        {{ currentIndex + 1 }} / {{ totalSteps }}
+      </span>
+    </div>
+
+    <div class="ngx-tour-actions">
+      <button
+        *ngIf="!isFirstStep"
+        class="ngx-tour-btn ngx-tour-btn-secondary"
+        (click)="onPrev()"
+      >
+        {{ step.prevBtnText || 'Previous' }}
+      </button>
+      
+      <button
+        *ngIf="!isLastStep"
+        class="ngx-tour-btn ngx-tour-btn-primary"
+        (click)="onNext()"
+      >
+        {{ step.nextBtnText || 'Next' }}
+      </button>
+      
+      <button
+        *ngIf="isLastStep"
+        class="ngx-tour-btn ngx-tour-btn-primary"
+        (click)="onDone()"
+      >
+        {{ step.doneBtnText || 'Done' }}
+      </button>
+    </div>
+  </div>
+</div>

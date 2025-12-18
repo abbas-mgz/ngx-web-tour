@@ -1,59 +1,171 @@
-# NgxWebTour
+# 🎯 NgxWebTour
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.7.
+A beautiful, modern, and fully customizable product tour library for Angular applications. Create engaging user onboarding experiences with smooth animations and professional UI.
 
-## Development server
+![Angular](https://img.shields.io/badge/Angular-13+-red.svg)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.7+-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
 
-To start a local development server, run:
+## ✨ Features
 
-```bash
-ng serve
-```
+- 🎨 **Beautiful Modern UI** - Professional design with smooth animations
+- 🎯 **Smart Auto-Positioning** - Automatically finds the best position for tooltips
+- 🌈 **Backdrop & Highlight** - Focus user attention with backdrop overlay
+- 📊 **Progress Tracking** - Visual progress bar and step counter
+- 🎮 **Full Control** - Next, Previous, Done buttons with customizable text
+- 📱 **Fully Responsive** - Works perfectly on all screen sizes
+- 🔄 **Observable State** - Track tour progress with RxJS observables
+- ⚙️ **Highly Customizable** - Configure every aspect of the tour
+- 🚀 **Multiple Tours** - Support for multiple independent tours
+- 💪 **Type Safe** - Full TypeScript support with IntelliSense
+- 🪶 **Lightweight** - Zero external dependencies (except Angular & RxJS)
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+## 📦 Installation
 
 ```bash
-ng build
+npm install ngx-web-tour
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## 🚀 Quick Start
 
-## Running unit tests
+### 1. Import Module
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+```typescript
+import { NgxWebTourModule } from 'ngx-web-tour';
+
+@NgModule({
+  imports: [NgxWebTourModule],
+})
+export class AppModule {}
+```
+
+### 2. Add Tour Directive
+
+```html
+<button
+  tour="welcome-tour"
+  tourTitle="Get Started"
+  tourText="Click here to begin your journey!"
+  [tourPriority]="1"
+>
+  Start
+</button>
+
+<div
+  tour="welcome-tour"
+  tourTitle="Dashboard"
+  tourText="View all your data in one place"
+  [tourPriority]="2"
+  tourPosition="bottom"
+>
+  Your Dashboard
+</div>
+```
+
+### 3. Start the Tour
+
+```typescript
+import { TourService } from 'ngx-web-tour';
+
+@Component({...})
+export class AppComponent {
+  constructor(private tourService: TourService) {}
+
+  startTour() {
+    this.tourService.start('welcome-tour');
+  }
+}
+```
+
+That's it! 🎉
+
+## 📖 Documentation
+
+- [Full Documentation](./projects/ngx-web-tour/README.md)
+- [Examples](./EXAMPLES.md)
+- [Compatibility Guide](./COMPATIBILITY.md)
+- [Changelog](./CHANGELOG.md)
+
+## 🎨 Screenshots & Demo
+
+### Beautiful Tooltip Design
+Professional, modern tooltips with:
+- Smooth animations and transitions
+- Auto-positioning to fit viewport
+- Progress indicator
+- Customizable buttons
+- Close button option
+
+### Backdrop Highlight
+Focus attention with:
+- Overlay backdrop
+- Highlighted element with pulse animation
+- Click-outside to close option
+
+## 🔧 Configuration Options
+
+```typescript
+this.tourService.configure({
+  backdrop: true,
+  backdropColor: 'rgba(0, 0, 0, 0.7)',
+  closeOnBackdropClick: true,
+  showProgress: true,
+  allowClose: true,
+  nextBtnText: 'Next →',
+  prevBtnText: '← Back',
+  doneBtnText: '✓ Done',
+  animationDuration: 300,
+});
+```
+
+## 📊 Track Tour State
+
+```typescript
+this.tourService.state$.subscribe(state => {
+  console.log('Active:', state.isActive);
+  console.log('Step:', state.currentStep + 1, '/', state.totalSteps);
+  console.log('Tour:', state.tourName);
+});
+```
+
+## 🎯 Directive Inputs
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `tour` | `string` | - | Tour identifier (required) |
+| `tourText` | `string` | - | Step description (required) |
+| `tourTitle` | `string` | - | Step title (optional) |
+| `tourPriority` | `number` | `0` | Step order |
+| `tourPosition` | `string` | `'auto'` | Tooltip position |
+| `tourShowProgress` | `boolean` | `true` | Show progress bar |
+| `tourAllowClose` | `boolean` | `true` | Show close button |
+
+## 🛠️ Development
+
+### Build Library
 
 ```bash
-ng test
+npm run build
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+### Run Tests
 
 ```bash
-ng e2e
+npm test
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## 🤝 Contributing
 
-## Additional Resources
+Contributions are welcome! Please feel free to submit issues or pull requests.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 📄 License
+
+MIT License - feel free to use in your projects!
+
+## ⭐ Show Your Support
+
+If you find this library useful, please give it a ⭐ on GitHub!
+
+---
+
+Made with ❤️ for the Angular community

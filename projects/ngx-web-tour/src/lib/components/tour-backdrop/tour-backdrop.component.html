@@ -1,0 +1,15 @@
+<div
+  class="ngx-tour-backdrop"
+  [class.visible]="isVisible"
+  [style.background-color]="color"
+  (click)="onBackdropClick()"
+>
+  <div
+    class="ngx-tour-highlight"
+    [style.top]="highlightStyle.top"
+    [style.left]="highlightStyle.left"
+    [style.width]="highlightStyle.width"
+    [style.height]="highlightStyle.height"
+    (click)="$event.stopPropagation()"
+  ></div>
+</div>

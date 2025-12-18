@@ -1,0 +1,50 @@
+$transition-speed: 0.3s;
+
+.ngx-tour-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+  opacity: 0;
+  transition: opacity $transition-speed ease;
+  pointer-events: all;
+
+  &.visible {
+    opacity: 1;
+  }
+}
+
+.ngx-tour-highlight {
+  position: absolute;
+  border-radius: 8px;
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.01);
+  transition: all $transition-speed ease;
+  pointer-events: none;
+  z-index: 10001;
+
+  // Pulse animation for highlight
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    animation: pulse 2s ease-in-out infinite;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.02);
+  }
+}

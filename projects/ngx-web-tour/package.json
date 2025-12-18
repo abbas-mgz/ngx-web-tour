@@ -1,0 +1,32 @@
+{
+  "name": "ngx-web-tour",
+  "version": "1.0.0",
+  "description": "A beautiful, customizable, and easy-to-use product tour library for Angular applications",
+  "keywords": [
+    "angular",
+    "tour",
+    "tutorial",
+    "guide",
+    "onboarding",
+    "walkthrough",
+    "product-tour",
+    "user-guide",
+    "tooltip",
+    "highlight"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/ngx-web-tour.git"
+  },
+  "peerDependencies": {
+    "@angular/common": ">=13.0.0",
+    "@angular/core": ">=13.0.0",
+    "rxjs": ">=6.5.0 || >=7.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}
